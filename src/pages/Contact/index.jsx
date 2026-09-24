@@ -70,7 +70,7 @@ export default function Contact() {
       const { error: fnError } = await supabase.functions.invoke('submit-message', { body: { ...payload } });
       
       if (fnError) {
-        toast.success('Your message has been received successfully. We may experience a delay sending the email notification.');
+        toast.success('Your message has been sent successfully. We will get back to you as soon as possible.');
       } else {
         toast.success('Message sent! We\'ll get back to you soon.');
       }
