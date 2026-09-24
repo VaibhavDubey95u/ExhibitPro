@@ -184,7 +184,7 @@ function ServicesSection({ data }) {
 }
 
 // ─── WHY CHOOSE US ──────────────────────────────────────────
-function WhyUsSection({ data, companyName }) {
+function WhyUsSection({ data, companyName, projectsStat = '200+' }) {
   return (
     <section className="section-padding bg-gray-50 dark:bg-dark-850">
       <div className="section-container">
@@ -243,7 +243,7 @@ function WhyUsSection({ data, companyName }) {
                 <CheckCircle className="w-5 h-5 text-white" />
               </div>
               <div>
-                <div className="font-bold text-gray-900 dark:text-white text-sm">200+ Projects</div>
+                <div className="font-bold text-gray-900 dark:text-white text-sm">{projectsStat} Projects</div>
                 <div className="text-gray-500 text-xs">Successfully Delivered</div>
               </div>
             </div>
@@ -369,7 +369,7 @@ function CTABanner({ data }) {
             to={data.cta_link || '/contact'}
             className="relative z-10 inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white text-brand-600 font-bold hover:bg-brand-50 transition-colors shadow-lg hover:scale-105 duration-200"
           >
-            {data.cta_text || 'Get a Free Quote'} <ArrowRight className="w-5 h-5" />
+            {data.cta_text || 'Discuss Your Project'} <ArrowRight className="w-5 h-5" />
           </Link>
         </motion.div>
       </div>
@@ -410,12 +410,14 @@ export default function Home() {
   const cta      = getBlock('cta_banner')?.data || {};
   
   const companyName = getFooterBlock('main')?.data?.company_name || 'ExhibitPro';
+  const projectsStat = (stats.items || []).find(item => item.label?.toLowerCase().includes('project'))?.value || '200+';
+
   return (
     <>
       <HeroSection data={hero} />
       <StatsSection data={stats} />
       <ServicesSection data={services} />
-      <WhyUsSection data={whyUs} companyName={companyName} />
+      <WhyUsSection data={whyUs} companyName={companyName} projectsStat={projectsStat} />
       <ProcessSection data={process} />
       <FeaturedProjects companyName={companyName} />
       <CTABanner data={cta} />

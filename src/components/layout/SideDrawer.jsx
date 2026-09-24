@@ -90,7 +90,7 @@ export default function SideDrawer({ isOpen, onClose, navLinks }) {
                   onClick={onClose}
                   className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-semibold text-sm transition-all shadow-glow"
                 >
-                  Get a Free Quote
+                  Discuss Your Project
                 </Link>
               </div>
             </nav>

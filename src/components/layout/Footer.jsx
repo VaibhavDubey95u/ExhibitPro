@@ -53,7 +53,7 @@ export default function Footer() {
             to="/contact"
             className="flex-shrink-0 flex items-center gap-2 px-6 py-3 bg-white text-brand-600 rounded-xl font-bold text-sm hover:bg-brand-50 transition-colors"
           >
-            Get a Free Quote <ArrowUpRight className="w-4 h-4" />
+            Discuss Your Project <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>
       </div>
