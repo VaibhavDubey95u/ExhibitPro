@@ -1,13 +1,17 @@
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Phone, Mail, MessageCircle } from 'lucide-react';
+import { X, Phone, Mail, MessageCircle, Moon, Sun, Settings } from 'lucide-react';
 import { useContent } from '@hooks/useContent';
+import { useTheme } from '@context/ThemeContext';
+import { useAuth } from '@context/AuthContext';
 
 export default function SideDrawer({ isOpen, onClose, navLinks }) {
   const location = useLocation();
   const { getBlock } = useContent('footer');
   const footerData = getBlock('main')?.data || {};
   const companyName = footerData.company_name || 'ExhibitPro';
+  const { isDark, toggleTheme } = useTheme();
+  const { isAdmin } = useAuth();
 
   const isActive = (to) =>
     to === '/' ? location.pathname === '/' : location.pathname.startsWith(to);
@@ -82,6 +86,21 @@ export default function SideDrawer({ isOpen, onClose, navLinks }) {
                   </motion.li>
                 ))}
               </ul>
+
+              {/* Preferences */}
+              <div className="mt-8 mb-4">
+                <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-4">Settings</p>
+                <div className="flex items-center gap-3">
+                  <button onClick={toggleTheme} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gray-50 dark:bg-white/5 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
+                    {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                    <span className="text-sm">{isDark ? 'Light' : 'Dark'}</span>
+                  </button>
+                  <Link to={isAdmin ? '/admin/dashboard' : '/admin/login'} onClick={onClose} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gray-50 dark:bg-white/5 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
+                    <Settings className="w-4 h-4" />
+                    <span className="text-sm">Admin</span>
+                  </Link>
+                </div>
+              </div>
 
               {/* CTA */}
               <div className="mt-8 space-y-3">

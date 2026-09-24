@@ -92,7 +92,7 @@ export default function Navbar() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={toggleTheme}
-                className={`p-2 rounded-xl transition-colors ${
+                className={`hidden lg:flex p-2 rounded-xl transition-colors ${
                   scrolled || isDark
                     ? 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10'
                     : 'text-white/80 hover:bg-white/10'
@@ -107,7 +107,7 @@ export default function Navbar() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => navigate(isAdmin ? '/admin/dashboard' : '/admin/login')}
-                className={`p-2 rounded-xl transition-colors ${
+                className={`hidden lg:flex p-2 rounded-xl transition-colors ${
                   scrolled || isDark
                     ? 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10'
                     : 'text-white/80 hover:bg-white/10'
