@@ -23,11 +23,16 @@ export default function About() {
   const hero   = getBlock('hero')?.data   || {};
   const story  = getBlock('story')?.data  || {};
   const values = getBlock('values')?.data || {};
+  const team   = getBlock('team')?.data   || {};
 
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-40 pb-24 bg-dark-900 overflow-hidden">
+      <section 
+        className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-dark-900 overflow-hidden min-h-[60vh] flex flex-col justify-center"
+        style={hero.background_url ? { backgroundImage: `url(${hero.background_url})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
+      >
+        {hero.background_url && <div className="absolute inset-0 bg-dark-950/80" />}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-900/30 via-transparent to-transparent" />
         <div className="section-container relative z-10 text-center">
           <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest bg-brand-500/20 text-brand-300 mb-4">
@@ -90,6 +95,35 @@ export default function About() {
           </div>
         </div>
       </section>
+
+      {/* Team */}
+      {team.members && team.members.length > 0 && (
+        <section className="section-padding">
+          <div className="section-container">
+            <div className="text-center max-w-2xl mx-auto mb-14">
+              <div className="accent-line mx-auto" />
+              <h2 className="font-display font-bold text-3xl md:text-4xl text-gray-900 dark:text-white">{team.heading || 'Meet the Team'}</h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+              {team.members.map((member, i) => (
+                <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} className="text-center group">
+                  <div className="relative mb-6 overflow-hidden rounded-3xl aspect-[3/4] bg-gray-100 dark:bg-white/5">
+                    {member.image_url ? (
+                      <img src={member.image_url} alt={member.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-brand-50 dark:bg-brand-900/20 text-brand-500 font-display font-bold text-4xl">
+                        {(member.name || 'T').charAt(0).toUpperCase()}
+                      </div>
+                    )}
+                  </div>
+                  <h3 className="font-display font-bold text-xl text-gray-900 dark:text-white">{member.name}</h3>
+                  <p className="text-brand-500 font-medium text-sm mt-1">{member.role}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* CTA */}
       <section className="section-padding">

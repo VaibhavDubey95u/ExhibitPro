@@ -125,7 +125,16 @@ function TeamEditor({ block, onSave }) {
                       <input value={m.role} onChange={e => updateMember(i, 'role', e.target.value)} className="form-input form-input-sm" />
                     </div>
                   </div>
-                  <MediaUpload page="about" block="team" label="Member Photo" currentUrl={m.image_url} onUpload={(url) => updateMember(i, 'image_url', url)} />
+                  <MediaUpload 
+                    page="about" 
+                    block="team" 
+                    label="Member Photo" 
+                    currentUrl={m.image_url} 
+                    onUpload={(url) => updateMember(i, 'image_url', url)} 
+                    accept="image/jpeg,image/png,image/webp"
+                    maxSizeMB={25}
+                    helperText="JPG, PNG, WEBP"
+                  />
                 </div>
                 <button onClick={() => removeMember(i)} className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors mt-6">
                   <Trash2 className="w-4 h-4" />

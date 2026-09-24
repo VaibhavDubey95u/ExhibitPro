@@ -3,7 +3,16 @@ import { Upload, X, Image as ImageIcon } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { uploadContentMedia } from '@services/contentApi';
 
-export default function MediaUpload({ page, block, currentUrl, onUpload, label = 'Upload Image' }) {
+export default function MediaUpload({ 
+  page, 
+  block, 
+  currentUrl, 
+  onUpload, 
+  label = 'Upload Image',
+  accept = 'image/jpeg,image/png,image/webp,video/mp4,video/webm',
+  maxSizeMB = 100,
+  helperText = 'JPG, PNG, WEBP, MP4, WEBM'
+}) {
   const [uploading, setUploading] = useState(false);
 
   const handleUpload = async (e) => {
@@ -11,15 +20,15 @@ export default function MediaUpload({ page, block, currentUrl, onUpload, label =
     if (!file) return;
     
     // Validate file type
-    const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'video/mp4', 'video/webm'];
+    const validTypes = accept.split(',');
     if (!validTypes.includes(file.type)) {
-      toast.error('Invalid file type. Supported types: JPG, PNG, WEBP, MP4, WEBM');
+      toast.error(`Invalid file type. Supported types: ${helperText}`);
       return;
     }
 
-    // Validate size (100MB max)
-    if (file.size > 100 * 1024 * 1024) {
-      toast.error('File too large. Maximum size is 100MB.');
+    // Validate size
+    if (file.size > maxSizeMB * 1024 * 1024) {
+      toast.error(`File too large. Maximum size is ${maxSizeMB}MB.`);
       return;
     }
 
@@ -69,9 +78,9 @@ export default function MediaUpload({ page, block, currentUrl, onUpload, label =
             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
               <span className="font-semibold">{uploading ? 'Uploading...' : 'Click to upload'}</span>
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">JPG, PNG, WEBP, MP4, WEBM (Max 100MB)</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">{helperText} (Max {maxSizeMB}MB)</p>
           </div>
-          <input type="file" className="hidden" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm" onChange={handleUpload} disabled={uploading} />
+          <input type="file" className="hidden" accept={accept} onChange={handleUpload} disabled={uploading} />
         </label>
       )}
     </div>
