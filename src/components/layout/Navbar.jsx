@@ -19,8 +19,8 @@ const navLinks = [
 export default function Navbar() {
   const { isDark, toggleTheme } = useTheme();
   const { user, isAdmin } = useAuth();
-  const { getBlock } = useContent('footer');
-  const companyName = getBlock('main')?.data?.company_name || 'ExhibitPro';
+  const { getBlock } = useContent('settings');
+  const companyName = getBlock('global')?.data?.site_name || 'ExhibitPro';
   const location = useLocation();
   const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = useState(false);

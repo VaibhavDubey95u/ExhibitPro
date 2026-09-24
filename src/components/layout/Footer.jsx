@@ -28,6 +28,9 @@ const quickLinks = [
 export default function Footer() {
   const { getBlock, loading } = useContent('footer');
   const footerData = getBlock('main')?.data || {};
+  
+  const { getBlock: getSettingsBlock } = useContent('settings');
+  const globalSiteName = getSettingsBlock('global')?.data?.site_name;
   const [privacyOpen, setPrivacyOpen] = useState(false);
   const [termsOpen, setTermsOpen] = useState(false);
 
@@ -42,6 +45,8 @@ export default function Footer() {
     privacy_policy = '',
     terms = '',
   } = footerData;
+
+  const finalCompanyName = globalSiteName || company_name;
 
   return (
     <footer className="bg-dark-950 text-gray-300">
@@ -65,10 +70,10 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center">
-                <span className="text-white font-display font-black text-lg">{(company_name || 'E').charAt(0).toUpperCase()}</span>
+                <span className="text-white font-display font-black text-lg">{(finalCompanyName || 'E').charAt(0).toUpperCase()}</span>
               </div>
               <span className="font-display font-bold text-xl text-white">
-                {company_name}
+                {finalCompanyName}
               </span>
             </Link>
             <p className="text-brand-400 text-sm font-medium mb-3">{tagline}</p>
@@ -141,7 +146,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/5">
         <div className="section-container py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500">
-          <p>© {new Date().getFullYear()} {company_name}. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {finalCompanyName}. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <button onClick={() => setPrivacyOpen(true)} className="hover:text-brand-400 transition-colors">
               Privacy Policy

@@ -7,9 +7,11 @@ import { useAuth } from '@context/AuthContext';
 
 export default function SideDrawer({ isOpen, onClose, navLinks }) {
   const location = useLocation();
-  const { getBlock } = useContent('footer');
-  const footerData = getBlock('main')?.data || {};
-  const companyName = footerData.company_name || 'ExhibitPro';
+  const { getBlock: getFooterBlock } = useContent('footer');
+  const footerData = getFooterBlock('main')?.data || {};
+  
+  const { getBlock: getSettingsBlock } = useContent('settings');
+  const companyName = getSettingsBlock('global')?.data?.site_name || 'ExhibitPro';
   const { isDark, toggleTheme } = useTheme();
   const { isAdmin } = useAuth();
 
