@@ -49,7 +49,7 @@ export default function MediaUpload({ page, block, currentUrl, onUpload, label =
           <button
             type="button"
             onClick={() => onUpload('')}
-            className="absolute top-2 right-2 w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg hover:bg-red-600"
+            className="absolute top-2 right-2 w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity shadow-lg hover:bg-red-600"
             title="Remove media"
           >
             <X className="w-4 h-4" />
