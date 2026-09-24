@@ -62,6 +62,7 @@ export default function ProjectsManager() {
     try {
       const payload = {
         ...form,
+        slug: slugify(form.slug),
         tags: form.tags ? form.tags.split(',').map(t => t.trim()).filter(Boolean) : [],
         services: form.services ? form.services.split(',').map(s => s.trim()).filter(Boolean) : [],
         year: Number(form.year),

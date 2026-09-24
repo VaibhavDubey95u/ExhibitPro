@@ -77,12 +77,12 @@ export default function ServiceAreasManager() {
       <div className="space-y-3">
         {areas.map(a => (
           <div key={a.id} className="card p-4 flex items-center gap-4">
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <h3 className="font-semibold text-gray-900 dark:text-white">{a.city}</h3>
               <p className="text-xs text-gray-500">{a.country} · {a.is_active ? '✅ Active' : '⛔ Hidden'}</p>
               {a.description && <p className="text-sm text-gray-500 mt-1 truncate">{a.description}</p>}
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-shrink-0">
               <button onClick={() => openEdit(a)} className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 text-gray-500 hover:text-brand-500 transition-colors">
                 <Pencil className="w-4 h-4" />
               </button>
